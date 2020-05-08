@@ -11,13 +11,31 @@ const runServer = async (): Promise<void> => {
     port = Number.isNaN(parsedPort) ? defaultPort : parsedPort;
   }
 
+  const low = require('lowdb');
+  const FileSync = require('lowdb/adapters/FileSync');
+
+  const adapter = new FileSync('/usr/shared/db/db.json');
+  const db = low(adapter);
+
+  const resolvers = {
+    Query: {
+      vehicle(parent, args, context, info) {
+        db.read();
+        const veh = db.get('vehicle').value()
+        console.log(JSON.stringify(veh));
+        return veh;
+      }
+    }
+  }
+
   const schema = makeExecutableSchema({
     typeDefs,
+    resolvers
   });
 
   const server = new ApolloServer({
     schema,
-    mocks: true,
+    mocks: false,
   });
 
   const { url } = await server.listen(port);
