@@ -1,0 +1,3 @@
+[submodule "vss-feeder"]
+	path = vss-feeder
+	url = https://github.com/GENIVI/vss-feeder.git
