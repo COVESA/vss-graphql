@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+    data-server:
+        container_name: data-server
+        image: vss-data-server
+        build:
+            context: ./vss-graphql
+        network_mode: host
+        volumes:
+            - ./db:/usr/shared/db/
+    data-feeder:
+        restart: always
+        container_name: data-feeder
+        image: vss-data-feeder
+        build:
+            context: ./vss-feeder
+        volumes:
+            - ./db:/usr/shared/db/
+        network_mode: host
