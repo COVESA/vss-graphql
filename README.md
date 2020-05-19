@@ -1,65 +1,30 @@
-# Data Server
+# Data Server with Data Feeder bundled
+
+This setup is incorporating Data Feeder as a submodule and composed using `docker-compose`
+
+## Downloading sources
+
+To have full repository established, if you have already cloned the _vss-grapqhl_ repository, download the submodule _vss-feeder_ sources:
+```bash
+git submodule init
+git submodule update
+```
+
+If you want to clone the whole setup including _vss-grapqhl_ and _vss-feeder_:
+```bash
+git clone --recursive https://github.com/GENIVI/vss-graphql.git
+```
 
 ## Docker setup
 
-To deploy the Data Server using Docker, first build the image described by the
-Dockerfile with:
+To deploy the Data Server with Data Feeder using Docker, run the command to build and execute the setup described in `docker-compose.yml`
 
 ```bash
-docker build --tag data-server:latest .
+docker-compose up
 ```
-
-NOTE: this will build the image and tag it with the name `data-server:latest`
-
-Then, to run a container with the built image:
-
-```bash
-docker run --publish 4000:4000 data-server
-```
-
-Alternatively, one can simply call a npm command that will execute the above
-commands building and running the docker image:
-
-```bash
-npm run docker:up
-```
-
 When the docker container starts it will log to the console some messages saying
 that server is ready and accessible on: `http://localhost:4000`
 
 ## Manual Setup
 
-To launch the Data Server from the command line, follow the below instructions.
-
-### Install dependencies
-
-To ensure the correct node version is being used, if one uses the
-node version manager [nvm](https://github.com/nvm-sh/nvm) it can simply run:
-
-```bash
-nvm use
-nvm install # if necessary
-```
-
-If `nvm` is not available, this project uses node version ^13.12.0. Thus, for
-installing node follow instructions from [official documentation](https://nodejs.org/en/download/).
-
-After setting up node version, to install `npm` dependencies run:
-
-```bash
-npm install
-```
-
-### Start server
-
-To start the server with a mock data scheme just execute:
-
-```console
-npm start
-```
-
-#### GraphiQL (playground)
-
-With the server running it is possible to access a GraphQL query playground
-were you can request information from the server it should be located at
-`http://localhost:4000`.
+To launch the Data Server from the command line, follow the `README.md` files included in corresponding subdirectories keeping in mind that database needs to be shared across those containers.
