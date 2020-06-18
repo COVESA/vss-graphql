@@ -71,6 +71,6 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.7.0",
     "lodash.merge": "^4.6.2",
-    "lowdb": "^1.0.0"
+    "sqlite3": "^4.2.0"
   }
 }
