@@ -30,10 +30,10 @@ const runServer = async (): Promise<void> => {
         let promise = new Promise((resolve, reject) => {
           sqlite_db.each("SELECT key, value FROM vss_data", (err, row) => {
             key = row.key;
-            let leafs = key.split('.');
-            let leaf = leafs.pop();
+            let leaves = key.split('.');
+            let leaf = leaves.pop();
             object = root;
-            for (let elem of leafs) {
+            for (let elem of leaves) {
               if (object !== undefined) {
                 if (!(elem in object)) {
                   object[elem] = new Object();
