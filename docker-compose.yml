@@ -17,3 +17,5 @@ services:
         volumes:
             - ./db:/usr/shared/db/
         network_mode: host
+        environment:
+            - SIMULATOR_IP
