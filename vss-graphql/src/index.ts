@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 import { makeExecutableSchema, ApolloServer } from 'apollo-server';
 
 import typeDefs from '@schemas';
@@ -23,30 +25,16 @@ const runServer = async (): Promise<void> => {
   const resolvers = {
     Query: {
       vehicle(parent, args, context, info) {
-        let key = "";
-        let object = new Object();
-        let root = new Object();
+        var vssMap = Object();
 
         let promise = new Promise((resolve, reject) => {
           sqlite_db.each("SELECT key, value FROM vss_data", (err, row) => {
-            key = row.key;
-            let leaves = key.split('.');
-            let leaf = leaves.pop();
-            object = root;
-            for (let elem of leaves) {
-              if (object !== undefined) {
-                if (!(elem in object)) {
-                  object[elem] = new Object();
-                }
-                object = object[elem];
-              }
-            }
-            if (object !== undefined && leaf !== undefined) object[leaf] = row.value;
+            _.set(vssMap, row.key, row.value);
           }, (err, n) => {
             if (err) {
               reject(err);
             } else {
-              resolve(root);
+              resolve(vssMap);
             }
           });
         });
