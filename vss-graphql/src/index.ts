@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const sqlite3 = require("sqlite3");
 
 import { makeExecutableSchema, ApolloServer } from 'apollo-server';
 
@@ -13,7 +14,6 @@ const runServer = async (): Promise<void> => {
     port = Number.isNaN(parsedPort) ? defaultPort : parsedPort;
   }
 
-  const sqlite3 = require("sqlite3");
   const dbPath = "/usr/shared/db/opends.db";
   let sqlite_db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
