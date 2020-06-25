@@ -1,5 +1,5 @@
 import set from 'lodash/set';
-import {Database, each } from 'sqlite3';
+import { Database } from 'sqlite3';
 import { makeExecutableSchema, ApolloServer } from 'apollo-server';
 import typeDefs from '@schemas';
 
@@ -27,6 +27,9 @@ const runServer = async (): Promise<void> => {
 
         let promise = new Promise((resolve, reject) => {
           sqlite_db.each("SELECT key, value FROM vss_data", (err, row) => {
+            if (err) {
+              throw err;
+            }
             set(vssMap, row.key, row.value);
           }, (err, n) => {
             if (err) {
