@@ -1,8 +1,6 @@
-const _ = require('lodash');
-const sqlite3 = require("sqlite3");
-
+import set from 'lodash/set';
+import {Database, each } from 'sqlite3';
 import { makeExecutableSchema, ApolloServer } from 'apollo-server';
-
 import typeDefs from '@schemas';
 
 const defaultPort = 4000;
@@ -15,7 +13,7 @@ const runServer = async (): Promise<void> => {
   }
 
   const dbPath = "/usr/shared/db/opends.db";
-  let sqlite_db = new sqlite3.Database(dbPath, (err) => {
+  let sqlite_db = new Database(dbPath, (err) => {
     if (err) {
       return console.error(err.message);
     }
@@ -29,7 +27,7 @@ const runServer = async (): Promise<void> => {
 
         let promise = new Promise((resolve, reject) => {
           sqlite_db.each("SELECT key, value FROM vss_data", (err, row) => {
-            _.set(vssMap, row.key, row.value);
+            set(vssMap, row.key, row.value);
           }, (err, n) => {
             if (err) {
               reject(err);
