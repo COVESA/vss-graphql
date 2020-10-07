@@ -1,0 +1,7 @@
+node_modules
+build
+.vscode
+.env
+.eslintcache
+.docker-secret*
+vsomeip.log
