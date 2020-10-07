@@ -29,16 +29,23 @@ const Vehicle = gql`
     Current consumption in liters per 100 km.
     """
     instantConsumption: Float
+      @hasPermissions(
+        permissions: ["Vehicle.Drivetrain.FuelSystem.InstantConsumption_READ"]
+      )
 
     """
     Level in fuel tank as percent of capacity. 0 = empty. 100 = full.
     """
     level: Int
+      @hasPermissions(permissions: ["Vehicle.Drivetrain.FuelSystem.Level_READ"])
 
     """
     Capacity of the fuel tank in liters
     """
     tankCapacity: Int
+      @hasPermissions(
+        permissions: ["Vehicle.Drivetrain.FuelSystem.TankCapacity_READ"]
+      )
   }
 
 
@@ -58,6 +65,11 @@ const Vehicle = gql`
     Engine speed measured as rotations per minute.
     """
     speed: Int
+      @hasPermissions(
+        permissions: [
+          "Vehicle.Drivetrain.InternalCombustionEngine.Engine.Speed_READ"
+        ]
+      )
   }
 
   """
@@ -68,6 +80,9 @@ const Vehicle = gql`
     Current gear. 0=Neutral. -1=Reverse
     """
     gear: Int
+      @hasPermissions(
+        permissions: ["Vehicle.Drivetrain.Transmission.Gear_READ"]
+      )
   }
 `;
 
