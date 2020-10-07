@@ -64,6 +64,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@profusion/apollo-validation-directives": "^2.0.3",
     "apollo-server": "^2.14.2",
     "core-util-is": "^1.0.2",
     "dotenv-safe": "^8.2.0",

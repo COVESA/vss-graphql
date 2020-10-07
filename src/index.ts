@@ -1,5 +1,12 @@
-import { makeExecutableSchema, ApolloServer } from 'apollo-server';
+import {
+  makeExecutableSchema,
+  ApolloServer,
+  SchemaDirectiveVisitor,
+  addMockFunctionsToSchema,
+} from 'apollo-server';
+import { ValidateDirectiveVisitor } from '@profusion/apollo-validation-directives';
 
+import schemaDirectives from '@directives';
 import typeDefs from '@schemas';
 
 const defaultPort = 4000;
@@ -11,13 +18,17 @@ const runServer = async (): Promise<void> => {
     port = Number.isNaN(parsedPort) ? defaultPort : parsedPort;
   }
 
-  const schema = makeExecutableSchema({
+  const schema = makeExecutableSchema<ApplicationContext>({
+    schemaDirectives,
     typeDefs,
   });
 
+  addMockFunctionsToSchema({ schema });
+  SchemaDirectiveVisitor.visitSchemaDirectives(schema, schemaDirectives);
+  ValidateDirectiveVisitor.addValidationResolversToSchema(schema);
+
   const server = new ApolloServer({
     schema,
-    mocks: true,
   });
 
   const { url } = await server.listen(port);
