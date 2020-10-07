@@ -1,0 +1,8 @@
+vss.permission.VEHICLE_READ:
+  protection_level: normal
+  attributes:
+    - 'Vehicle.Drivetrain.InternalCombustionEngine.Engine.Speed_READ'
+    - 'Vehicle.Drivetrain.Transmission.Gear_READ'
+    - 'Vehicle.Drivetrain.FuelSystem.InstantConsumption_READ'
+    - 'Vehicle.Drivetrain.FuelSystem.Level_READ'
+    - 'Vehicle.Drivetrain.FuelSystem.TankCapacity_READ'
