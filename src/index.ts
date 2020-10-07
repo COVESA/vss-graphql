@@ -7,6 +7,7 @@ import {
 import { ValidateDirectiveVisitor } from '@profusion/apollo-validation-directives';
 
 import schemaDirectives from '@directives';
+import { createContext, ApplicationContext } from '@context';
 import typeDefs from '@schemas';
 
 const defaultPort = 4000;
@@ -28,6 +29,7 @@ const runServer = async (): Promise<void> => {
   ValidateDirectiveVisitor.addValidationResolversToSchema(schema);
 
   const server = new ApolloServer({
+    context: createContext(),
     schema,
   });
 
