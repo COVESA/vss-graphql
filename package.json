@@ -6,6 +6,7 @@
   "description": "This application exposes the vss tree data to android apps.",
   "scripts": {
     "test": "echo",
+    "generate-token": "ts-node -r dotenv/config scripts/jwt.ts",
     "docker:build": "docker build --tag data-server:latest .",
     "docker:run": "docker run --publish 4000:4000 data-server",
     "docker:up": "run-s docker:build docker:run",
@@ -16,7 +17,7 @@
     "vss"
   ],
   "engines": {
-    "node": "^13.12.0"
+    "node": "^8.16.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
