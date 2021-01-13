@@ -9,7 +9,7 @@
     "docker:build": "docker build --tag data-server:latest .",
     "docker:run": "docker run --publish 4000:4000 data-server",
     "docker:up": "run-s docker:build docker:run",
-    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
+    "start": "ts-node -r dotenv/config -r tsconfig-paths/register ./src/index.ts",
     "start:ci": "node ./src/index.ts"
   },
   "keywords": [
@@ -64,6 +64,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@profusion/apollo-validation-directives": "^2.0.3",
     "apollo-server": "^2.14.2",
     "core-util-is": "^1.0.2",
     "dotenv-safe": "^8.2.0",

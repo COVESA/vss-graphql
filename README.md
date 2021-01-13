@@ -31,6 +31,25 @@ that server is ready and accessible on: `http://localhost:4000`
 
 To launch the Data Server from the command line, follow the below instructions.
 
+### Set Environment Variables
+
+To start the server is necessary to provide all environment variables, this can
+be done using a `.env` file. For a quick start just create a symbolic link to
+`.env.example`
+
+#### Manual
+
+```console
+cp .env.example .env
+vim .env
+```
+
+Or for a quick start:
+
+```console
+ ln -s .env.example .env
+```
+
 ### Install dependencies
 
 To ensure the correct node version is being used, if one uses the
